@@ -6,124 +6,114 @@
     <title>CardifyHub — AI-Powered Legacy Content Converter</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.05); }
-        .glow-bg {
-            animation: pulse-glow 6s infinite ease-in-out;
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.08); }
+        }
+        .hero-glow {
+            animation: glowPulse 5s infinite ease-in-out;
         }
     </style>
 </head>
-<body class="bg-[#090d16] text-slate-100 font-sans selection:bg-sky-500 selection:text-white relative overflow-x-hidden">
+<body class="bg-[#05030a] text-slate-100 font-sans selection:bg-purple-500 selection:text-white relative overflow-x-hidden">
 
-    <!-- Background Glow Effects -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-sky-600/20 blur-[120px] rounded-full pointer-events-none glow-bg"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-tr from-purple-900/40 via-indigo-600/30 to-fuchsia-600/30 blur-[140px] rounded-full pointer-events-none hero-glow"></div>
 
-    <!-- Header / Navbar -->
-    <header class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between border-b border-slate-800/80 backdrop-blur-md sticky top-0 z-50 bg-[#090d16]/80">
+    <header class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between border-b border-white/10 backdrop-blur-xl sticky top-0 z-50 bg-[#05030a]/80">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/30">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-purple-500/40 text-lg font-bold">
                 📦
             </div>
-            <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">CardifyHub</span>
+            <span class="text-xl font-bold tracking-tight text-white">CardifyHub</span>
         </div>
         <nav class="hidden md:flex items-center gap-8 text-sm text-slate-400">
-            <a href="#features" class="hover:text-white transition">Features</a>
-            <a href="#dashboard" class="hover:text-white transition">AI Workspace</a>
+            <a href="#features" class="hover:text-white transition">Home</a>
+            <a href="#dashboard" class="hover:text-white transition">Featured</a>
             <a href="#pricing" class="hover:text-white transition">Pricing</a>
         </nav>
         <div class="flex items-center gap-4">
             <button onclick="alert('Login modal coming soon!')" class="text-sm font-medium text-slate-300 hover:text-white">Login</button>
-            <a href="#dashboard" class="px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-sky-500 to-blue-600 rounded-xl shadow-lg shadow-sky-500/25 hover:opacity-90 transition">Start for Free</a>
+            <a href="#dashboard" class="px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl shadow-lg shadow-purple-500/30 hover:opacity-90 transition">Get Started</a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center relative z-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/60 text-xs font-medium text-sky-400 mb-6 shadow-inner">
-            <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span> AI-Powered Family Legacy Platform
+    <section class="max-w-5xl mx-auto px-6 pt-24 pb-16 text-center relative z-10">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-purple-300 mb-6 shadow-inner backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span> AI-Powered Real-time Legacy Conversion
         </div>
         <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
-            Convert your faded family memories into <span class="bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent">Living Timelines</span> with AI.
+            Your intelligent way to manage <span class="bg-gradient-to-r from-white via-purple-300 to-purple-500 bg-clip-text text-transparent">family memories.</span>
         </h1>
-        <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10">
-            Restore old scratched photos, colorize black & white moments, and preserve generations of heritage instantly.
+        <p class="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-10">
+            Perfect for founders, creators, and families who need a high-converting digital legacy platform.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#dashboard" class="w-full sm:w-auto px-8 py-3.5 text-base font-bold text-white bg-gradient-to-r from-sky-500 to-blue-600 rounded-xl shadow-xl shadow-sky-500/30 hover:scale-105 transition">Upload Photos Now</a>
-            <a href="#pricing" class="w-full sm:w-auto px-8 py-3.5 text-base font-medium text-slate-300 bg-slate-900 border border-slate-800 rounded-xl hover:bg-slate-800 transition">View Pricing</a>
+            <a href="#dashboard" class="w-full sm:w-auto px-8 py-3.5 text-base font-bold text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl shadow-xl shadow-purple-500/30 hover:scale-105 transition">Get started</a>
+            <a href="#pricing" class="w-full sm:w-auto px-8 py-3.5 text-base font-medium text-slate-300 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition backdrop-blur-md">Start for Free</a>
         </div>
     </section>
 
-    <!-- Interactive AI Workspace / Dashboard Demo -->
-    <section id="dashboard" class="max-w-5xl mx-auto px-6 py-12">
-        <div class="bg-slate-900/90 border border-slate-800/80 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
-            <div class="absolute -right-20 -top-20 w-64 h-64 bg-indigo-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+    <section id="dashboard" class="max-w-5xl mx-auto px-6 py-12 relative z-10">
+        <div class="bg-[#0e0a1f]/90 border border-white/10 rounded-3xl p-6 md:p-10 shadow-2xl backdrop-blur-xl relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-purple-600/20 blur-[90px] rounded-full pointer-events-none"></div>
             
             <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold mb-2">Live AI Restoration Sandbox</h2>
-                <p class="text-slate-400 text-sm">Upload multiple old photos (Free limit: up to 3 photos).</p>
+                <h2 class="text-2xl font-bold mb-2 text-white">Dashboard Overview</h2>
+                <p class="text-slate-400 text-sm">Upload multiple old family photos (Free limit: up to 3 photos).</p>
             </div>
 
-            <!-- Upload Box -->
-            <div class="border-2 border-dashed border-slate-700/80 bg-[#090d16] rounded-2xl p-8 text-center cursor-pointer hover:border-sky-500/60 transition group">
+            <div class="border-2 border-dashed border-white/10 bg-[#070411] rounded-2xl p-8 text-center cursor-pointer hover:border-purple-500/50 transition group">
                 <input type="file" id="photoInput" multiple accept="image/*" class="hidden" onchange="handleFiles(this)">
                 <label for="photoInput" class="cursor-pointer block">
                     <div class="text-4xl mb-3 group-hover:scale-110 transition">📥</div>
-                    <span class="text-sky-400 font-semibold text-base block mb-1">Click to browse or drop family photos</span>
-                    <span class="text-xs text-slate-500">Supports JPG, PNG, WEBP (Multiple selection enabled)</span>
+                    <span class="text-purple-400 font-semibold text-base block mb-1">Click to Upload Multiple Photos</span>
+                    <span class="text-xs text-slate-500">Supports JPG, PNG, WEBP</span>
                 </label>
             </div>
 
-            <!-- Preview Grid -->
             <div id="previewContainer" class="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4 hidden"></div>
 
-            <!-- Action Button -->
             <div id="actionContainer" class="mt-8 text-center hidden">
-                <button onclick="startProcessing()" id="processBtn" class="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-sky-500 to-blue-600 font-bold text-white rounded-xl shadow-lg shadow-sky-500/30 hover:opacity-90 transition">
+                <button onclick="startProcessing()" id="processBtn" class="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-purple-600 to-indigo-600 font-bold text-white rounded-xl shadow-lg shadow-purple-500/30 hover:opacity-90 transition">
                     ✨ Start Bulk AI Restoration
                 </button>
             </div>
 
-            <!-- Result Box -->
-            <div id="resultBox" class="mt-8 p-6 bg-emerald-950/40 border border-emerald-500/30 rounded-2xl text-center hidden">
-                <h3 class="text-emerald-400 font-bold text-lg mb-2">🎉 Restoration Successful!</h3>
+            <div id="resultBox" class="mt-8 p-6 bg-purple-950/40 border border-purple-500/30 rounded-2xl text-center hidden backdrop-blur-md">
+                <h3 class="text-purple-300 font-bold text-lg mb-2">🎉 Restoration Successful!</h3>
                 <p class="text-slate-300 text-sm mb-4">Your memories have been enhanced and added to your Family Timeline.</p>
-                <button onclick="alert('Downloading all HD photos...')" class="px-6 py-2.5 bg-emerald-600 text-white font-semibold rounded-xl text-sm shadow-lg hover:bg-emerald-500 transition">Download All HD Files</button>
+                <button onclick="alert('Downloading all HD photos...')" class="px-6 py-2.5 bg-purple-600 text-white font-semibold rounded-xl text-sm shadow-lg hover:bg-purple-500 transition">Download All HD Files</button>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="max-w-5xl mx-auto px-6 py-16">
+    <section id="pricing" class="max-w-5xl mx-auto px-6 py-16 relative z-10">
         <div class="text-center mb-12">
-            <span class="text-xs font-semibold uppercase tracking-wider text-sky-400">Simple Plans For Every Family</span>
-            <h2 class="text-3xl font-extrabold mt-2">Invest in Your Family Heritage</h2>
+            <span class="text-xs font-semibold uppercase tracking-wider text-purple-400">Pricing Plan</span>
+            <h2 class="text-3xl font-extrabold mt-2 text-white">Simple Plans For Every Stage.</h2>
         </div>
 
         <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            <!-- Free Plan -->
-            <div class="bg-slate-900/80 border border-slate-800 rounded-3xl p-8 flex flex-col justify-between shadow-xl">
+            <div class="bg-[#0e0a1f]/80 border border-white/10 rounded-3xl p-8 flex flex-col justify-between shadow-xl backdrop-blur-md">
                 <div>
                     <h3 class="text-xl font-bold text-white mb-2">Free Plan</h3>
-                    <p class="text-slate-400 text-sm mb-6">Perfect for testing out the restoration quality.</p>
-                    <div class="text-4xl font-extrabold mb-6">$0 <span class="text-sm font-normal text-slate-400">/ month</span></div>
+                    <p class="text-slate-400 text-sm mb-6">Ideal for testing out the restoration quality.</p>
+                    <div class="text-4xl font-extrabold mb-6 text-white">$0 <span class="text-sm font-normal text-slate-400">/ month</span></div>
                     <ul class="space-y-3 text-sm text-slate-300 mb-8">
                         <li class="flex items-center gap-2">✓ 5 restorations / month</li>
                         <li class="flex items-center gap-2">✓ Standard resolution quality</li>
                         <li class="flex items-center gap-2">✓ 30-item timeline storage</li>
                     </ul>
                 </div>
-                <button onclick="alert('You are currently on Free Plan')" class="w-full py-3 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-xl transition">Current Plan</button>
+                <button onclick="alert('You are currently on Free Plan')" class="w-full py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold rounded-xl transition">Current Plan</button>
             </div>
 
-            <!-- Family Plan -->
-            <div class="bg-gradient-to-b from-slate-900 to-[#0b1329] border border-sky-500/50 rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative">
-                <div class="absolute -top-3 right-8 bg-sky-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md">Most Popular</div>
+            <div class="bg-gradient-to-b from-[#160d33] to-[#0e0a1f] border border-purple-500/50 rounded-3xl p-8 flex flex-col justify-between shadow-2xl relative backdrop-blur-md">
+                <div class="absolute -top-3 right-8 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md">Most Popular</div>
                 <div>
                     <h3 class="text-xl font-bold text-white mb-2">Family Plan</h3>
                     <p class="text-slate-400 text-sm mb-6">Designed for complete family archive management.</p>
-                    <div class="text-4xl font-extrabold mb-6">$3.50 <span class="text-sm font-normal text-slate-400">/ month</span></div>
+                    <div class="text-4xl font-extrabold mb-6 text-white">$3.50 <span class="text-sm font-normal text-slate-400">/ month</span></div>
                     <ul class="space-y-3 text-sm text-slate-300 mb-8">
                         <li class="flex items-center gap-2">✓ Unlimited photo restorations</li>
                         <li class="flex items-center gap-2">✓ High-resolution (HD) downloads</li>
@@ -132,17 +122,15 @@
                         <li class="flex items-center gap-2">✓ Letter translation support</li>
                     </ul>
                 </div>
-                <button onclick="alert('Redirecting to Secure Checkout...')" class="w-full py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-semibold rounded-xl shadow-lg shadow-sky-500/30 hover:opacity-90 transition">Upgrade to Family</button>
+                <button onclick="alert('Redirecting to Secure Checkout...')" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg shadow-purple-500/30 hover:opacity-90 transition">Upgrade to Family</button>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800/80 mt-20 py-8 text-center text-sm text-slate-500">
+    <footer class="border-t border-white/10 mt-20 py-8 text-center text-sm text-slate-500 relative z-10">
         <p>© 2026 CardifyHub. All rights reserved. Built with passion for your family legacy.</p>
     </footer>
 
-    <!-- Frontend Script for Interactive Demo -->
     <script>
         function handleFiles(input) {
             const files = input.files;
@@ -164,7 +152,7 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         const div = document.createElement('div');
-                        div.className = 'bg-[#090d16] p-3 rounded-xl border border-slate-800';
+                        div.className = 'bg-[#070411] p-3 rounded-xl border border-white/10';
                         div.innerHTML = `
                             <img src="${e.target.result}" class="w-full h-32 object-cover rounded-lg mb-2">
                             <p class="text-xs text-slate-400 text-center">Photo #${index + 1}</p>
@@ -190,4 +178,4 @@
         }
     </script>
 </body>
-  </html>
+</html>
