@@ -1,275 +1,310 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CardifyHub — AI-Powered Family Legacy Platform</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @keyframes glowPulse {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.06); }
-        }
-        .hero-glow {
-            animation: glowPulse 6s infinite ease-in-out;
-        }
-        .glass-card {
-            background: rgba(18, 11, 36, 0.75);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(168, 85, 247, 0.2);
-        }
-        .glass-card:hover {
-            border-color: rgba(168, 85, 247, 0.5);
-            box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.3);
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="CardifyHub — preserve, restore and share your family's legacy.">
+<title>CardifyHub — Preserve Your Legacy</title>
+<style>
+:root{
+  --bg:#050505;--panel:#0b0b0c;--panel2:#111112;--line:#2b2b2d;
+  --white:#fff;--soft:#e8e8ea;--muted:#9b9ba2;--pink:#ff42c8;--violet:#8b68ff;
+  --green:#66e6ad;--shadow:0 30px 90px rgba(0,0,0,.55)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#050505;color:var(--white);font:14px/1.6 'Inter',ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(650px 420px at 15% 8%,rgba(255,255,255,.055),transparent 65%),radial-gradient(700px 500px at 90% 55%,rgba(139,104,255,.07),transparent 70%);z-index:-1}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.hide{display:none!important}
+.wrap{width:min(1180px,calc(100% - 32px));margin:auto}
+.muted{color:var(--muted)}
+.green{color:var(--green)}
+/* top-down opening */
+body>*{animation:pageIn .85s cubic-bezier(.2,.8,.2,1) both}
+@keyframes pageIn{from{opacity:0;transform:translateY(-48px)}to{opacity:1;transform:none}}
+@keyframes floatBox{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.08)}50%{box-shadow:0 0 0 10px rgba(255,255,255,0)}}
+@keyframes shimmer{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@keyframes slideIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.reveal{animation:slideIn .7s cubic-bezier(.2,.8,.2,1) both}
+.float{animation:floatBox 5s ease-in-out infinite}
+.nav{position:sticky;top:0;z-index:50;background:rgba(5,5,5,.86);backdrop-filter:blur(20px);border-bottom:1px solid #202022}
+.navin{min-height:74px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:11px;font-family:'Space Grotesk',ui-sans-serif;font-weight:700;font-size:20px;letter-spacing:-.7px}
+.logo{width:42px;height:42px;border:1px solid #fff;border-radius:14px;display:grid;place-items:center;background:#090909;position:relative;overflow:hidden}
+.logo:after{content:"";position:absolute;width:55px;height:2px;background:linear-gradient(90deg,transparent,#fff,transparent);animation:shimmer 3s linear infinite}
+.logoMark{font-size:20px}
+.navlinks{margin-left:auto;display:flex;gap:8px;align-items:center}
+.btn{border:1px solid #3a3a3d;background:#fff;color:#050505;padding:13px 20px;border-radius:14px;font-weight:850;transition:.25s;position:relative;overflow:hidden}
+.btn:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:translateX(-130%);transition:.5s}
+.btn:hover:after{transform:translateX(130%)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(255,255,255,.12)}
+.btn.dark{background:#0a0a0a;color:#fff;border-color:#3a3a3d}
+.btn.ghost{background:transparent;color:#fff}
+.btn.primary{background:linear-gradient(110deg,#fff,#ddd);color:#050505;box-shadow:0 18px 45px rgba(255,255,255,.13)}
+.mobileMenu{display:none}
+.homeNavLink{border:0;background:transparent;color:#a9a9b0;padding:10px 9px;font-weight:600;transition:.22s}
+.homeNavLink:hover{color:#fff;transform:translateY(-2px)}
+.homeMenuBtn{display:none;border:1px solid #333;background:#0d0d0e;color:#fff;width:42px;height:42px;border-radius:13px;font-size:19px}
+.homeMenu{position:absolute;right:16px;top:68px;min-width:190px;padding:8px;border:1px solid #303034;border-radius:18px;background:rgba(10,10,11,.97);box-shadow:0 24px 60px rgba(0,0,0,.55);z-index:60}
+.homeMenu button{display:block;width:100%;border:0;background:transparent;color:#ddd;text-align:left;padding:12px 13px;border-radius:11px;font-weight:600}
+.homeMenu button:hover{background:#19191b;color:#fff}
+.nav{position:sticky}
+@media(max-width:760px){
+ .homeNavLink{display:none}
+ .homeMenuBtn{display:block}
+ .startBtn{padding:11px 16px;font-size:13px}
+ .hero p{font-size:13.5px;line-height:1.65;max-width:520px}
+ h1{font-size:clamp(34px,10vw,48px);letter-spacing:-2.2px}
+}
+
+
+.homeMenu{transform-origin:top right;animation:menuIn .22s ease both}
+@keyframes menuIn{from{opacity:0;transform:translateY(-8px) scale(.97)}to{opacity:1;transform:none}}
+.homeMenuBtn{display:block;transition:transform .2s,box-shadow .2s}
+.homeMenuBtn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,255,255,.08)}
+.compare{box-shadow:inset 0 0 50px rgba(0,0,0,.18)}
+.compare:after{content:"";position:absolute;left:0;right:0;top:-20%;height:18%;background:linear-gradient(180deg,transparent,rgba(255,255,255,.12),transparent);animation:scan 4.8s linear infinite;pointer-events:none;z-index:4}
+@keyframes scan{0%{top:-20%}100%{top:110%}}
+.showcaseFoot .muted{font-size:12px;line-height:1.55}
+.toolCard,.priceCard{will-change:transform}
+
+/* landing */
+.hero{padding:76px 0 60px}
+.heroGrid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #303033;background:#0b0b0c;border-radius:999px;padding:7px 11px;color:#ddd;font-weight:800}
+.dot{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 18px #fff;animation:pulse 2s infinite}
+h1{font-family:'Space Grotesk',ui-sans-serif;font-size:clamp(36px,5.2vw,60px);line-height:1.04;letter-spacing:-2.8px;margin:20px 0 14px}
+.hero p{font-size:14px;line-height:1.7;color:#a7a7ae;max-width:535px;letter-spacing:-.05px}
+.heroActions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.heroMeta{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px;color:#808087;font-size:12px}
+.heroMeta b{color:#fff}
+.showcase{border:1px solid #303033;border-radius:30px;background:linear-gradient(145deg,#111112,#070707);padding:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.showcase:before{content:"";position:absolute;inset:-1px;background:linear-gradient(110deg,transparent,rgba(255,255,255,.08),transparent);transform:translateX(-100%);animation:shimmer 6s linear infinite}
+.windowbar{height:36px;display:flex;gap:7px;align-items:center;padding:0 8px}
+.windowbar i{width:9px;height:9px;border-radius:50%;background:#444}
+.compare{position:relative;height:360px;border-radius:22px;overflow:hidden;background:#171717}
+.compare img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.compare .after{clip-path:inset(0 0 0 50%)}
+.compareShade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.22),transparent 45%,rgba(0,0,0,.08));pointer-events:none}
+.compareLine{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;box-shadow:0 0 18px #fff}
+.compareKnob{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;font-weight:950;box-shadow:0 10px 35px #000}
+.compareLabel{position:absolute;top:14px;padding:7px 10px;border-radius:10px;background:rgba(0,0,0,.68);backdrop-filter:blur(10px);font-size:11px;font-weight:900;letter-spacing:.12em}
+.beforeLabel{left:14px}.afterLabel{right:14px}
+.compareRange{position:absolute;inset:0;width:100%;opacity:0;cursor:ew-resize;z-index:5}
+.showcaseFoot{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:16px 6px 4px}
+.showcaseFoot b{font-size:17px}
+.chip{border:1px solid #333;border-radius:999px;padding:7px 10px;color:#aaa;font-size:12px}
+/* sections */
+.section{padding:70px 0}
+.sectionHead{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:28px}
+.sectionHead h2{font-family:'Space Grotesk',ui-sans-serif;font-size:34px;letter-spacing:-1.6px;margin:0}
+.sectionHead p{max-width:520px;color:#8f8f97;margin:0;font-size:13px;line-height:1.65}
+.tools{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.toolCard{background:linear-gradient(145deg,#111112,#080808);border:1px solid #29292c;border-radius:26px;padding:22px;position:relative;overflow:hidden;min-height:440px;transition:.3s}
+.toolCard:hover{transform:translateY(-7px);border-color:#666;box-shadow:0 25px 60px rgba(0,0,0,.45)}
+.toolCard:before{content:"";position:absolute;width:170px;height:170px;right:-70px;top:-80px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.09),transparent 68%);animation:floatBox 6s infinite}
+.toolTop{display:flex;justify-content:space-between;gap:12px;align-items:start}
+.toolIndex{font-size:12px;letter-spacing:.15em;color:#777}
+.toolTitle{font-family:'Space Grotesk',ui-sans-serif;font-size:23px;letter-spacing:-.8px;margin:10px 0 5px}
+.toolCard p{color:#92929a;font-size:13px;line-height:1.65}
+.demoFrame{height:225px;border:1px solid #29292c;border-radius:19px;overflow:hidden;margin-top:18px;background:#060606;position:relative}
+.demoPair{display:grid;grid-template-columns:1fr 1fr;height:100%}
+.demoPair img{width:100%;height:100%;object-fit:cover;filter:grayscale(.85) contrast(.78) brightness(.65)}
+.demoPair .good{filter:none}
+.demoCaption{position:absolute;bottom:10px;left:10px;right:10px;display:flex;justify-content:space-between}
+.demoCaption span{background:rgba(0,0,0,.72);padding:6px 9px;border-radius:9px;font-size:10px;font-weight:900;letter-spacing:.1em}
+.toolLink{margin-top:15px;display:inline-flex}
+/* pricing */
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.priceCard{background:#0b0b0c;border:1px solid #29292c;border-radius:25px;padding:25px;position:relative;animation:floatBox 6s ease-in-out infinite}
+.priceCard:nth-child(2){animation-delay:.5s}.priceCard:nth-child(3){animation-delay:1s}
+.priceCard.featured{border-color:#777;box-shadow:0 25px 70px rgba(255,255,255,.06)}
+.price{font-size:44px;font-weight:950;letter-spacing:-2px;margin:16px 0}
+.price small{font-size:14px;color:#888;letter-spacing:0}
+.save{display:inline-block;border:1px solid #555;padding:5px 8px;border-radius:8px;font-size:11px;font-weight:900}
+.priceCard ul{padding-left:20px;color:#aaa;min-height:130px}
+.priceCard li{margin:8px 0}
+/* footer */
+footer{border-top:1px solid #202022;padding:35px 0;color:#777}
+.footerIn{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+/* app */
+#app{min-height:100vh;background:#050505}
+.appTop{position:sticky;top:0;z-index:40;border-bottom:1px solid #222;background:rgba(5,5,5,.92);backdrop-filter:blur(20px)}
+.appin{min-height:78px;display:flex;align-items:center;gap:14px}
+.appname{font-size:21px;font-weight:950}.appsub{font-size:12px;color:#777}
+.avatar{margin-left:auto;width:42px;height:42px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;font-weight:950}
+.appgrid{display:grid;grid-template-columns:220px 1fr;gap:25px;padding-top:28px}
+.side{position:sticky;top:105px;height:max-content;border:1px solid #29292c;border-radius:22px;padding:10px;background:#0a0a0b}
+.side .group{font-size:11px;color:#666;padding:10px}
+.side button{width:100%;text-align:left;border:0;background:transparent;color:#aaa;padding:12px;border-radius:12px;margin:2px 0;font-weight:800}
+.side button:hover,.side button.active{background:#fff;color:#050505}
+.dash{padding-bottom:80px}
+.dashHead{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:24px}
+.dashHead h1{font-size:48px;letter-spacing:-2px;margin:12px 0 6px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:30px}
+.stat{border:1px solid #29292c;background:#0b0b0c;border-radius:20px;padding:20px;animation:floatBox 6s ease-in-out infinite}
+.stat:nth-child(2){animation-delay:.4s}.stat:nth-child(3){animation-delay:.8s}.stat:nth-child(4){animation-delay:1.2s}
+.stat span,.stat small{display:block;color:#777}.stat b{font-size:34px;display:block;margin:8px 0}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{border:1px solid #29292c;background:#0b0b0c;border-radius:22px;padding:22px;animation:slideIn .65s both}
+.card h3{font-size:23px;margin:14px 0 5px}
+.form,.account{border:1px solid #29292c;background:#0b0b0c;border-radius:25px;padding:25px;box-shadow:var(--shadow)}
+.field{display:grid;gap:7px;margin:15px 0}.field label{color:#aaa;font-weight:800}
+input,textarea{width:100%;background:#070707;color:#fff;border:1px solid #333;border-radius:13px;padding:13px;outline:none}
+input:focus,textarea:focus{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.06)}
+textarea{min-height:120px;resize:vertical}
+.drop{border:1px dashed #555;border-radius:20px;padding:25px;text-align:center}
+.drop input{display:none}
+.preview{max-width:100%;max-height:360px;border-radius:17px;margin:20px auto;display:none}
+.account{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.notice{border:1px solid #333;background:#101011;color:#aaa;border-radius:13px;padding:13px;margin-top:14px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.76);backdrop-filter:blur(12px);display:grid;place-items:center;padding:18px}
+.modalbox{width:min(500px,100%);background:#0b0b0c;border:1px solid #444;border-radius:25px;padding:25px;box-shadow:0 35px 100px #000;animation:pageIn .45s both}
+.modalhead{display:flex;justify-content:space-between;align-items:start}.close{border:1px solid #444;background:#111;color:#fff;border-radius:11px;width:40px;height:40px;font-size:23px}
+.tabs{display:flex;gap:8px;margin:20px 0}.tabs button{flex:1}.tabs .active{background:#fff;color:#000}
+.msg{color:#ff9edc;margin-top:10px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;z-index:200;background:#fff;color:#000;padding:12px 17px;border-radius:13px;font-weight:850;transition:.3s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){
+ .heroGrid{grid-template-columns:1fr}.hero{padding-top:45px}.tools{grid-template-columns:1fr}.pricing{grid-template-columns:1fr}.appgrid{grid-template-columns:1fr}.side{position:static;display:flex;overflow:auto}.side .group{display:none}.side button{white-space:nowrap;width:auto}.stats{grid-template-columns:repeat(2,1fr)}.account{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+ .wrap{width:min(100% - 20px,1180px)}.navlinks .desktop{display:none}.mobileMenu{display:block;margin-left:auto}.hero h1{font-size:44px;letter-spacing:-2.2px}.sectionHead{display:block}.sectionHead h2{font-size:34px;margin-bottom:8px}.compare{height:285px}.toolCard{min-height:410px}.demoFrame{height:190px}.appin .appsub{display:none}.appin>.btn{padding:10px 12px}.dashHead{display:block}.dashHead .btn{margin-top:12px}.dashHead h1{font-size:40px}.cards{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:15px}.stat b{font-size:28px}.showcaseFoot{align-items:start;flex-direction:column}
+}
+
+/* v6: reliable before/after presentation */
+.compare img{object-fit:cover;object-position:center;height:100%;width:100%;display:block}
+.compare #heroBefore{filter:saturate(.72) sepia(.18) contrast(.95)}
+.compare #heroAfter{filter:saturate(1.08) contrast(1.04)}
+.compareLine{transition:left .12s ease-out}
+.compareKnob{transition:left .12s ease-out,transform .2s ease}
+.compare:hover .compareKnob{transform:translate(-50%,-50%) scale(1.08)}
+.demoPair{overflow:hidden}
+.demoPair img{object-fit:cover;object-position:center}
+.demoPair img:first-child{filter:saturate(.7) sepia(.2) contrast(.94)}
+.demoPair img.good{filter:saturate(1.08) contrast(1.04)}
+.homeMenuBtn{user-select:none;-webkit-tap-highlight-color:transparent}
+
+</style>
+<style>
+/* Typography refinement: smaller, premium and easier to scan. */
+.hero p{font-size:12.5px;line-height:1.65;max-width:500px;color:#9b9ba3}
+.sectionHead p{font-size:12px;line-height:1.6;max-width:500px}
+.toolCard p,.card p{font-size:12px;line-height:1.6}
+.footerBrand p{font-size:11.5px;line-height:1.6;max-width:300px}
+.footerCol button,.footerCol span{font-size:11.5px;line-height:1.55}
+.footerLogo{display:flex;align-items:center;gap:9px}.footerLogo strong{font-size:18px;color:#eee;font-family:'Manrope',sans-serif;letter-spacing:-.5px}
+.legalbox{max-height:min(78vh,650px);overflow:auto}.legalBody{color:#aaa;font-size:12px;line-height:1.75;margin-top:18px}.legalBody h3{color:#eee;font-size:14px;margin:18px 0 7px}.legalBody p{margin:7px 0}.legalBody ul{padding-left:18px;margin:8px 0}.legalBody li{margin:4px 0}
+@media(max-width:650px){.hero p{font-size:12px;max-width:100%}.sectionHead p{font-size:11.5px}.toolCard p,.card p{font-size:11.5px}.footerBrand p{font-size:11px}.footerCol button,.footerCol span{font-size:11px}}
+</style>
 </head>
-<body class="bg-[#05030a] text-slate-100 font-sans selection:bg-purple-500 selection:text-white relative overflow-x-hidden">
+<body>
+<div id="marketing">
+<header class="nav">
+ <div class="wrap navin">
+  <a class="brand" href="#" onclick="return goHome()"><span class="logo"><span class="logoMark">C</span></span>Cardify<span style="color:#aaa">Hub</span></a>
+  <nav class="navlinks">
+<button type="button" class="homeNavLink" onclick="window.scrollToId('home')">Home</button>
+<button type="button" class="homeNavLink" onclick="window.scrollToId('tools')">Tools</button>
+<button type="button" class="homeNavLink" onclick="window.scrollToId('pricing')">Pricing</button>
+<button type="button" class="homeNavLink" onclick="window.scrollToId('about')">About</button>
+<button type="button" class="btn primary startBtn" onclick="openAuth('login')">Get started</button>
+<button type="button" class="homeMenuBtn" id="homeMenuBtn" aria-label="Open website menu" onclick="window.toggleHomeMenu()">☰</button>
+</nav>
+<div id="homeMenu" class="homeMenu hide">
+<button type="button" onclick="window.scrollToId('home');window.closeHomeMenu()">Home</button>
+<button type="button" onclick="window.scrollToId('tools');window.closeHomeMenu()">Tools</button>
+<button type="button" onclick="window.scrollToId('pricing');window.closeHomeMenu()">Pricing</button>
+<button type="button" onclick="window.scrollToId('about');window.closeHomeMenu()">About</button>
+<button type="button" onclick="openAuth('login');window.closeHomeMenu()">Get started</button>
+</div>
+  <div id="homeMenu" class="homeMenu hide">
+   <button type="button" onclick="window.scrollToId('home');window.closeHomeMenu()">Home</button>
+   <button type="button" onclick="window.scrollToId('tools');window.closeHomeMenu()">Tools</button>
+   <button type="button" onclick="window.scrollToId('pricing');window.closeHomeMenu()">Plans</button>
+   <button type="button" onclick="window.scrollToId('about');window.closeHomeMenu()">About</button>
+   <button type="button" onclick="openAuth('login');window.closeHomeMenu()">Get started</button>
+  </div>
+ </div>
+</header>
 
-    <!-- Glowing Background Aura (Responsive Scaling) -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[350px] sm:w-[700px] md:w-[900px] h-[300px] sm:h-[450px] bg-gradient-to-tr from-purple-900/40 via-indigo-600/30 to-fuchsia-600/30 blur-[120px] sm:blur-[150px] rounded-full pointer-events-none hero-glow"></div>
+<main>
+<section class="hero" id="home">
+ <div class="wrap heroGrid">
+  <div class="reveal">
+   <span class="eyebrow"><span class="dot"></span> Private AI-powered family archive</span>
+   <h1>Preserve what time should never erase.</h1>
+   <p>Restore, organise and preserve your family's most meaningful memories in one private digital archive.</p>
+   <div class="heroActions">
+    <button class="btn primary" onclick="openAuth('signup')">Create your archive</button>
+    <button class="btn dark" onclick="window.scrollToId('tools')">Explore the tools</button>
+   </div>
+   <div class="heroMeta"><span><b>Before → After</b> restoration</span><span><b>100</b> free credits</span><span><b>Private</b> by design</span></div>
+  </div>
+  <div class="showcase float">
+  <div class="windowbar">
+    <i></i>
+    <i></i>
+    <i></i>
+    <span style="margin-left:auto;color:#777;font-size:11px">
+      LIVE RESTORATION PREVIEW
+    </span>
+  </div>
 
-    <!-- Header / Navbar -->
-    <header class="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between border-b border-white/10 backdrop-blur-xl sticky top-0 z-50 bg-[#05030a]/80">
-        <div class="flex items-center gap-2 sm:gap-3">
-            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-purple-500/40 text-base sm:text-lg font-bold">
-                📦
-            </div>
-            <span class="text-lg sm:text-xl font-bold tracking-tight text-white">CardifyHub</span>
-        </div>
-        <nav class="hidden md:flex items-center gap-8 text-sm text-slate-400">
-            <a href="#features" class="hover:text-white transition">Features</a>
-            <a href="#dashboard" class="hover:text-white transition">AI Workspace</a>
-            <a href="#pricing" class="hover:text-white transition">Pricing</a>
-        </nav>
-        <div class="flex items-center gap-2 sm:gap-4">
-            <span id="userDisplay" class="text-xs text-purple-300 font-medium hidden"></span>
-            <button onclick="openAuthModal()" id="authBtn" class="text-xs sm:text-sm font-medium text-slate-300 hover:text-white px-3 sm:px-4 py-2 rounded-xl bg-white/5 border border-white/10 transition">Login / Signup</button>
-            <a href="#dashboard" class="hidden sm:inline-block px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl shadow-lg shadow-purple-500/30 hover:opacity-90 transition">Get Started</a>
-        </div>
-    </header>
+  <div class="compare" id="heroCompare">
+    <div class="compareLabel beforeLabel">BEFORE</div>
+    <div class="compareLabel afterLabel">AFTER</div>
 
-    <!-- Hero Section -->
-    <section class="max-w-5xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-12 sm:pb-16 text-center relative z-10">
-        <div class="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] sm:text-xs font-medium text-purple-300 mb-6 shadow-inner backdrop-blur-md">
-            <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span> AI-Powered Real-time Legacy Conversion
-        </div>
-        <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
-            Your intelligent way to manage <span class="bg-gradient-to-r from-white via-purple-300 to-purple-500 bg-clip-text text-transparent">family memories.</span>
-        </h1>
-        <p class="text-sm sm:text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-8 sm:mb-10 px-2">
-            Restore scratched photos, generate emotional AI stories, and preserve generations of heritage instantly.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4">
-            <a href="#dashboard" class="w-full sm:w-auto px-8 py-3.5 text-sm sm:text-base font-bold text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl shadow-xl shadow-purple-500/30 hover:scale-105 transition text-center">Get Started Now</a>
-            <a href="#pricing" class="w-full sm:w-auto px-8 py-3.5 text-sm sm:text-base font-medium text-slate-300 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition backdrop-blur-md text-center">View Pricing</a>
-        </div>
-    </section>
+    <img
+      id="heroBefore"
+      src="YOUR_BEFORE_IMAGE_HERE"
+      alt="Before restoration — old family photograph"
+    />
 
-    <!-- Interactive Dashboard Sandbox -->
-    <section id="dashboard" class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10">
-        <div class="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-10 shadow-2xl relative overflow-hidden">
-            <div class="absolute -right-20 -top-20 w-64 h-64 bg-purple-600/20 blur-[90px] rounded-full pointer-events-none"></div>
-            
-            <div class="text-center mb-6 sm:mb-8">
-                <h2 class="text-xl sm:text-2xl font-bold mb-2 text-white">Dashboard Overview</h2>
-                <p class="text-slate-400 text-xs sm:text-sm">Upload multiple old family photos (Free limit: up to 3 photos).</p>
-            </div>
-
-            <!-- Upload Box -->
-            <div class="border-2 border-dashed border-white/15 bg-[#070411]/80 rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center cursor-pointer hover:border-purple-500/60 transition group">
-                <input type="file" id="photoInput" multiple accept="image/*" class="hidden" onchange="handleFiles(this)">
-                <label for="photoInput" class="cursor-pointer block">
-                    <div class="text-3xl sm:text-4xl mb-3 group-hover:scale-110 transition">📥</div>
-                    <span class="text-purple-400 font-semibold text-sm sm:text-base block mb-1">Click to Upload Multiple Photos</span>
-                    <span class="text-[11px] sm:text-xs text-slate-500">Supports JPG, PNG, WEBP (Max 3 free)</span>
-                </label>
-            </div>
-
-            <!-- Preview Grid -->
-            <div id="previewContainer" class="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 hidden"></div>
-
-            <!-- Action Button -->
-            <div id="actionContainer" class="mt-6 sm:mt-8 text-center hidden">
-                <button onclick="startProcessing()" id="processBtn" class="w-full md:w-auto px-8 py-3.5 sm:py-4 bg-gradient-to-r from-purple-600 to-indigo-600 font-bold text-white rounded-xl shadow-lg shadow-purple-500/30 hover:opacity-90 transition text-sm sm:text-base">
-                    ✨ Start Bulk AI Restoration
-                </button>
-            </div>
-
-            <!-- Result Box -->
-            <div id="resultBox" class="mt-6 sm:mt-8 p-5 sm:p-6 bg-purple-950/40 border border-purple-500/30 rounded-2xl text-center hidden backdrop-blur-md">
-                <h3 class="text-purple-300 font-bold text-base sm:text-lg mb-2">🎉 Restoration & AI Story Generated!</h3>
-                <p id="aiStoryText" class="text-slate-300 text-xs sm:text-sm italic mb-4">"1978: Khushi ka mahol, purani yaadein jo ab hamesha ke liye amar ho gayi hain."</p>
-                <button onclick="alert('Downloading all HD restored files...')" class="px-6 py-2.5 bg-purple-600 text-white font-semibold rounded-xl text-xs sm:text-sm shadow-lg hover:bg-purple-500 transition">Download All HD Files</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16 relative z-10">
-        <div class="text-center mb-10 sm:mb-12">
-            <span class="text-xs font-semibold uppercase tracking-wider text-purple-400">Pricing Plan</span>
-            <h2 class="text-2xl sm:text-3xl font-extrabold mt-2 text-white">Simple Plans For Every Stage.</h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-3xl mx-auto">
-            <!-- Free Plan -->
-            <div class="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-xl">
-                <div>
-                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Free Plan</h3>
-                    <p class="text-slate-400 text-xs sm:text-sm mb-6">Ideal for testing out the restoration quality.</p>
-                    <div class="text-3xl sm:text-4xl font-extrabold mb-6 text-white">$0 <span class="text-xs sm:text-sm font-normal text-slate-400">/ month</span></div>
-                    <ul class="space-y-3 text-xs sm:text-sm text-slate-300 mb-8">
-                        <li class="flex items-center gap-2">✓ 3 photo restorations / batch</li>
-                        <li class="flex items-center gap-2">✓ Standard resolution quality</li>
-                        <li class="flex items-center gap-2">✓ Basic timeline storage</li>
-                    </ul>
-                </div>
-                <button onclick="alert('You are currently on Free Plan')" class="w-full py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold rounded-xl transition text-sm">Current Plan</button>
-            </div>
-
-            <!-- Family Plan ($10 Discounted) -->
-            <div class="bg-gradient-to-b from-[#160d33] to-[#0e0a1f] border border-purple-500/60 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl relative backdrop-blur-md">
-                <div class="absolute -top-3 right-6 sm:right-8 bg-purple-600 text-white text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md">Special Discount</div>
-                <div>
-                    <h3 class="text-lg sm:text-xl font-bold text-white mb-2">Family Pro Plan</h3>
-                    <p class="text-slate-400 text-xs sm:text-sm mb-6">Designed for complete family archive management.</p>
-                    <div class="text-3xl sm:text-4xl font-extrabold mb-2 text-white">$10 <span class="text-xs sm:text-sm font-normal text-slate-400">/ month</span></div>
-                    <p class="text-xs text-purple-400 mb-6 line-through">$20/month regular price</p>
-                    <ul class="space-y-3 text-xs sm:text-sm text-slate-300 mb-8">
-                        <li class="flex items-center gap-2">✓ Unlimited photo restorations</li>
-                        <li class="flex items-center gap-2">✓ High-resolution (HD) downloads</li>
-                        <li class="flex items-center gap-2">✓ Unlimited timeline storage</li>
-                        <li class="flex items-center gap-2">✓ AI Story & Caption Generator</li>
-                        <li class="flex items-center gap-2">✓ Direct family sharing permissions</li>
-                    </ul>
-                </div>
-                <button onclick="alert('Redirecting to Secure Checkout for $10/mo...')" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold rounded-xl shadow-lg shadow-purple-500/30 hover:opacity-90 transition text-sm">Upgrade to Family Pro</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Auth Modal Overlay -->
-    <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden px-4">
-        <div class="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 max-w-md w-full relative border border-purple-500/40">
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">✕</button>
-            <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">Welcome to CardifyHub</h3>
-            <p class="text-slate-400 text-xs sm:text-sm mb-6">Sign in to save your restored family memories securely.</p>
-            
-            <div id="authError" class="bg-red-950/50 border border-red-500/30 text-red-300 text-xs p-3 rounded-xl mb-4 hidden"></div>
-
-            <button onclick="loginWithGoogle()" class="w-full py-3 bg-white/10 hover:bg-white/15 border border-white/10 text-white font-semibold rounded-xl mb-4 transition flex items-center justify-center gap-2 text-sm">
-                🌐 Continue with Google
-            </button>
-
-            <div class="text-center text-xs text-slate-500">Secure Firebase Authentication</div>
-        </div>
+    <div class="afterLayer" id="afterLayer">
+      <img
+        id="heroAfter"
+        src="YOUR_AFTER_IMAGE_HERE"
+        alt="After restoration — restored family photograph"
+      />
     </div>
 
-    <!-- Footer -->
-    <footer class="border-t border-white/10 mt-16 sm:mt-20 py-8 text-center text-xs sm:text-sm text-slate-500 relative z-10 px-4">
-        <p>© 2026 CardifyHub. All rights reserved. Built with passion for your family legacy.</p>
-    </footer>
+    <div class="compareLine" id="compareLine">
+      <div class="compareKnob">
+        <span>‹</span>
+        <span>›</span>
+      </div>
+    </div>
 
-    <!-- Firebase SDK Scripts -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    <input
+      class="compareRange"
+      id="compareRange"
+      type="range"
+      min="0"
+      max="100"
+      value="50"
+      aria-label="Compare before and after restoration"
+    />
+  </div>
 
-        const firebaseConfig = {
-          apiKey: "AIzaSyCJVta34f0Mf9foZcfkf2GpJob9KKZB_sE",
-          authDomain: "cardifyhub.firebaseapp.com",
-          projectId: "cardifyhub",
-          storageBucket: "cardifyhub.firebasestorage.app",
-          messagingSenderId: "126094586342",
-          appId: "1:126094586342:web:63ce520eb4abcff2112627",
-          measurementId: "G-HY0ZDDNVDZ"
-        };
+  <div class="previewFooter">
+    <div>
+      <strong>AI Photo Restoration</strong>
+      <span>Compare the original memory with its restored result.</span>
+    </div>
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-
-        window.openAuthModal = function() {
-            document.getElementById('authModal').classList.remove('hidden');
-        }
-
-        window.closeAuthModal = function() {
-            document.getElementById('authModal').classList.add('hidden');
-        }
-
-        window.loginWithGoogle = async function() {
-            try {
-                await signInWithPopup(auth, provider);
-                closeAuthModal();
-            } catch (error) {
-                document.getElementById('authError').innerText = error.message;
-                document.getElementById('authError').classList.remove('hidden');
-            }
-        }
-
-        onAuthStateChanged(auth, (user) => {
-            const authBtn = document.getElementById('authBtn');
-            const userDisplay = document.getElementById('userDisplay');
-            if (user) {
-                userDisplay.innerText = `👤 ${user.displayName || user.email}`;
-                userDisplay.classList.remove('hidden');
-                authBtn.innerText = 'Logout';
-                authBtn.onclick = () => signOut(auth);
-            } else {
-                userDisplay.classList.add('hidden');
-                authBtn.innerText = 'Login / Signup';
-                authBtn.onclick = openAuthModal;
-            }
-        });
-    </script>
-
-    <!-- Frontend Upload Script -->
-    <script>
-        function handleFiles(input) {
-            const files = input.files;
-            const previewContainer = document.getElementById('previewContainer');
-            const actionContainer = document.getElementById('actionContainer');
-            
-            if (files.length > 3) {
-                alert('Free plan limit exceeded! You can upload a maximum of 3 photos at once.');
-                input.value = '';
-                return;
-            }
-
-            previewContainer.innerHTML = '';
-            if (files.length > 0) {
-                previewContainer.classList.remove('hidden');
-                actionContainer.classList.remove('hidden');
-                
-                Array.from(files).forEach((file, index) => {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const div = document.createElement('div');
-                        div.className = 'bg-[#070411] p-3 rounded-xl border border-white/10';
-                        div.innerHTML = `
-                            <img src="${e.target.result}" class="w-full h-32 object-cover rounded-lg mb-2">
-                            <p class="text-xs text-slate-400 text-center">Photo #${index + 1} (Ready)</p>
-                        `;
-                        previewContainer.appendChild(div);
-                    }
-                    reader.readAsDataURL(file);
-                });
-            }
-        }
-
-        function startProcessing() {
-            const btn = document.getElementById('processBtn');
-            btn.innerText = '✨ AI is restoring and generating story...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                document.getElementById('actionContainer').classList.add('hidden');
-                document.getElementById('resultBox').classList.remove('hidden');
-                btn.innerText = '✨ Start Bulk AI Restoration';
-                btn.disabled = false;
-            }, 3000);
-        }
-    </script>
-</body>
-</html>
+    <div class="previewStatus">
+      <span class="statusDot"></span>
+      AI RESTORED
+    </div>
+  </div>
+  </div>
