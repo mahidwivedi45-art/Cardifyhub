@@ -525,7 +525,54 @@ function render(v){
 }
 function appCard(index,title,desc,v){return`<div class="card"><span class="toolIndex">${index}</span><h3>${title}</h3><p class="muted">${desc}</p><button class="btn primary" onclick="view('${v}')">Open tool →</button></div>`}
 window.downloadOriginal=()=>{if(!selectedFile){toast("Please select a photo first.");return}const a=document.createElement("a");a.href=URL.createObjectURL(selectedFile);a.download=selectedFile.name;a.click()};
-window.restore=()=>{if(!selectedFile){toast("Please select a photo first.");return}if(AI_RESTORE_ENDPOINT.includes("PASTE_"))toast("Your secure AI endpoint is not connected yet.");else toast("Photo prepared for secure AI processing.")};
+window.restore=async()=>{
+  if(!selectedFile){
+    toast("Please select a photo first.");
+    return;
+  }
+
+  try{
+    toast("Restoring photo...");
+
+    const reader=new FileReader();
+
+    const image=await new Promise((resolve,reject)=>{
+      reader.onload=()=>resolve(reader.result);
+      reader.onerror=()=>reject(new Error("Could not read the image."));
+      reader.readAsDataURL(selectedFile);
+    });
+
+    const response=await fetch("/api/restore",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({image})
+    });
+
+    const data=await response.json();
+
+    if(!response.ok){
+      throw new Error(data?.error||"Restoration failed.");
+    }
+
+    const output=Array.isArray(data.output)?data.output[0]:data.output;
+
+    if(!output){
+      throw new Error("No restored image was returned.");
+    }
+
+    const preview=$("preview");
+
+    if(preview){
+      preview.src=output;
+      preview.style.display="block";
+    }
+
+    toast("Photo restored successfully.");
+  }catch(error){
+    console.error(error);
+    toast(error.message||"Restoration failed.");
+  }
+};
 window.story=()=>{const t=$("stitle").value.trim()||"A family memory";const n=$("snotes").value.trim()||"A moment worth preserving for future generations.";const box=$("sresult");box.classList.remove("hide");box.innerHTML=`<b>${esc(t)}</b><br><br>${esc(n)}<br><br>This memory can now become part of your family's private legacy archive.`};
 window.invite=()=>{const e=$("invite").value.trim();if(!e){toast("Please enter a family member email address.");return}const link=location.href.split("#")[0]+"#family-"+btoa(e).replace(/=/g,"");const box=$("ires");box.classList.remove("hide");box.innerHTML=`Private invitation prepared for <b>${esc(e)}</b><br><input value="${esc(link)}" readonly style="margin-top:8px">`};
 let heroRange=$("heroRange");
