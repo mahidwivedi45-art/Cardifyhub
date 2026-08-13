@@ -15,12 +15,13 @@ export default async function handler(req, res) {
     }
 
     if (!process.env.REPLICATE_API_TOKEN) {
+  console.error("ENV_CHECK_FAILED: REPLICATE_API_TOKEN is missing");
+
   return res.status(500).json({
     error: "ENV_CHECK_FAILED",
-    hasToken: Boolean(process.env.REPLICATE_API_TOKEN)
+    message: "REPLICATE_API_TOKEN is missing from the production function environment."
   });
     }
-
     const response = await fetch(
       "https://api.replicate.com/v1/predictions",
       {
