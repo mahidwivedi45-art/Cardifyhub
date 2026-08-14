@@ -1,0 +1,9 @@
+{
+  "name": "cardifyhub",
+  "version": "1.0.0",
+  "description": "CardifyHub AI Integration",
+  "main": "index.js",
+  "dependencies": {
+    "@gradio/client": "^1.9.0"
+  }
+}
