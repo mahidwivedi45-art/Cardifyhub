@@ -1,5 +1,3 @@
-import { HfInference } from "@huggingface/inference";
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -14,26 +12,29 @@ export default async function handler(req, res) {
     const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
     const buffer = Buffer.from(base64Data, 'base64');
 
-    const hf = new HfInference(process.env.HF_TOKEN);
+    // Direct Hugging Face Inference API fetch call
+    const response = await fetch(
+      "https://api-inference.huggingface.co/models/dx8152/Qwen-Image-Edit-2509-Light_restoration",
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.HF_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          inputs: image, // Direct base64 string pass karein
+          parameters: { prompt: "restore this old damaged photo, high quality, clear details" }
+        })
+      }
+    );
 
-    const response = await hf.imageToImage({
-      model: "dx8152/Qwen-Image-Edit-2509-Light_restoration",
-      inputs: buffer,
-      parameters: { prompt: "restore this old damaged photo, high quality, clear details" }
-    });
-
-    // Safe conversion check for Blob/ArrayBuffer/Buffer
-    let resultBuffer;
-    if (response instanceof Buffer) {
-      resultBuffer = response;
-    } else if (typeof response.arrayBuffer === 'function') {
-      const arrayBuffer = await response.arrayBuffer();
-      resultBuffer = Buffer.from(arrayBuffer);
-    } else {
-      // Fallback for blob/other formats
-      resultBuffer = Buffer.from(await response.text());
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`HF API Error: ${errText}`);
     }
 
+    const arrayBuffer = await response.arrayBuffer();
+    const resultBuffer = Buffer.from(arrayBuffer);
     const base64Result = resultBuffer.toString('base64');
     const outputUrl = `data:image/jpeg;base64,${base64Result}`;
 
