@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "@gradio/client": "^1.9.0"
+    "@huggingface/inference": "^2.8.0"
   }
 }
