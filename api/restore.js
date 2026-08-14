@@ -12,9 +12,9 @@ export default async function handler(req, res) {
     }
 
     // Hugging Face Space se connect karein
-    const app = await Client.connect("dx8152/Qwen-Image-Edit-2509-Light_restoration", {
-      hf_token: process.env.HF_TOKEN
-    });
+const app = await Client.connect("dx8152/Qwen-Image-Edi", {
+  hf_token: process.env.HF_TOKEN
+});
 
     // Model predict function call karein
     const result = await app.predict("/predict", {
