@@ -548,7 +548,14 @@ window.restore=async()=>{
       body:JSON.stringify({image})
     });
 
-    const data=await response.json();
+    const responseText = await response.text();
+let data;
+try {
+    data = JSON.parse(responseText);
+} catch (e) {
+    console.error("Server Response:", responseText);
+    throw new Error("Server error (Invalid JSON response)");
+}
 
     if(!response.ok){
       throw new Error(data?.error||"Restoration failed.");
