@@ -14,14 +14,16 @@ export default async function handler(req, res) {
       });
     }
 
-    if (!process.env.REPLICATE_API_TOKEN) {
-  console.error("ENV_CHECK_FAILED: REPLICATE_API_TOKEN is missing");
+    console.log("REPLICATE ENV CHECK:", {
+  exists: !!process.env.REPLICATE_API_TOKEN,
+  length: process.env.REPLICATE_API_TOKEN?.length || 0
+});
 
+if (!process.env.REPLICATE_API_TOKEN) {
   return res.status(500).json({
-    error: "ENV_CHECK_FAILED",
-    message: "REPLICATE_API_TOKEN is missing from the production function environment."
+    error: "ENV_CHECK_FAILED"
   });
-    }
+}
     const response = await fetch(
       "https://api.replicate.com/v1/predictions",
       {
