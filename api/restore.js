@@ -1,69 +1,23 @@
+import { Client } from "@gradio/client";
+
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({
-      error: "Only POST requests are allowed"
-    });
+  if (req.method !== 'POST') {
+    return res.status(405.json({ error: 'Method not allowed' }));
   }
 
   try {
-    const { image } = req.body || {};
-
-    if (!image) {
-      return res.status(400).json({
-        error: "Image is required"
-      });
-    }
-
-    console.log("REPLICATE ENV CHECK:", {
-  exists: !!process.env.REPLICATE_API_TOKEN,
-  length: process.env.REPLICATE_API_TOKEN?.length || 0
-});
-
-if (!process.env.REPLICATE_API_TOKEN) {
-  return res.status(500).json({
-    error: "ENV_CHECK_FAILED"
-  });
-}
-    const response = await fetch(
-      "https://api.replicate.com/v1/predictions",
-      {
-        method: "POST",
-        headers: {
-          "Authorization":
-            `Bearer ${process.env.REPLICATE_API_TOKEN}`,
-          "Content-Type": "application/json",
-          "Prefer": "wait"
-        },
-        body: JSON.stringify({
-          version:
-            "8aa841ec761ec12846e211d0ffca30b566cff98a078e7baf1a1d49dad5c88b37",
-          input: {
-            img: image,
-            version: "v1.4",
-            scale: 2
-          }
-        })
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      return res.status(response.status).json({
-        error: data?.detail || data?.error || "Replicate API error"
-      });
-    }
-
-    return res.status(200).json({
-      success: true,
-      output: data.output
+    // Us Space ka naam likhein jo aapne use kiya hai (e.g., username/space-name)
+    const app = await Client.connect("dx8152/Qwen-Image-Edit-2509-Light_restoration", {
+      hf_token: process.env.HF_TOKEN
     });
 
+    // Frontend se aane wali image data ko predict function mein pass karein
+    const result = await app.predict("/predict", {
+      image: req.body.image, // Base64 ya image URL
+    });
+
+    return res.status(200).json({ output: result.data });
   } catch (error) {
-    console.error(error);
-
-    return res.status(500).json({
-      error: error.message || "Restoration failed"
-    });
+    return res.status(500).json({ error: error.message });
   }
 }
