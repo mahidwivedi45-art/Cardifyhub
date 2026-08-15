@@ -1,5 +1,3 @@
-import { InferenceClient } from "@huggingface/inference";
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -11,39 +9,35 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Image data is required.' });
     }
 
-    const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
-    const buffer = Buffer.from(base64Data, 'base64');
-
-    const client = new InferenceClient(process.env.HF_TOKEN);
-
-    const result = await client.imageToImage({
-      provider: "hf-inference",
-      model: "dx8152/Qwen-Image-Edit-2509-Light_restoration",
-      inputs: buffer,
-      parameters: { 
-        prompt: "restore this old damaged photo, high quality, clear details" 
+    // Direct Wavespeed router endpoint
+    const response = await fetch(
+      "https://router.huggingface.co/wavespeed/api/v3/wavespeed-ai/qwen-image/edit-plus-lora",
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.HF_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          inputs: image, // Yeh already base64 data URL hai
+          parameters: {
+            prompt: "restore this old damaged photo, high quality, clear details",
+          }
+        })
       }
-    });
+    );
 
-    // Safe conversion without relying on .arrayBuffer()
-    let resultBuffer;
-    if (result instanceof Buffer) {
-      resultBuffer = result;
-    } else if (typeof result.arrayBuffer === 'function') {
-      const ab = await result.arrayBuffer();
-      resultBuffer = Buffer.from(ab);
-    } else if (result instanceof Uint8Array) {
-      resultBuffer = Buffer.from(result);
-    } else {
-      // Fallback if it returns a blob or other format
-      const arrayBuffer = await new Response(result).arrayBuffer();
-      resultBuffer = Buffer.from(arrayBuffer);
+    if (!response.ok) {
+      const errText = await response.text();
+      throw new Error(`API Error: ${errText}`);
     }
 
-    const base64Result = resultBuffer.toString('base64');
-    const outputUrl = `data:image/jpeg;base64,${base64Result}`;
+    const result = await response.json();
+    
+    // Agar API direct image ya URL ya base64 return karti hai uske hisab se output bhejein
+    const outputUrl = result.output || result.image || (typeof result === 'string' ? result : null);
 
-    return res.status(200).json({ output: outputUrl });
+    return res.status(200).json({ output: outputUrl || result });
 
   } catch (error) {
     console.error("Vercel Function Error:", error);
