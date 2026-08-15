@@ -16,8 +16,7 @@ export default async function handler(req, res) {
 
     const client = new InferenceClient(process.env.HF_TOKEN);
 
-    // Provider ko 'hf-inference' kar diya hai
-    const resultBlob = await client.imageToImage({
+    const result = await client.imageToImage({
       provider: "hf-inference",
       model: "dx8152/Qwen-Image-Edit-2509-Light_restoration",
       inputs: buffer,
@@ -26,11 +25,23 @@ export default async function handler(req, res) {
       }
     });
 
-    const arrayBuffer = await resultBlob.arrayBuffer();
-    const resultBuffer = Buffer.from(arrayBuffer);
+    // Safe conversion without relying on .arrayBuffer()
+    let resultBuffer;
+    if (result instanceof Buffer) {
+      resultBuffer = result;
+    } else if (typeof result.arrayBuffer === 'function') {
+      const ab = await result.arrayBuffer();
+      resultBuffer = Buffer.from(ab);
+    } else if (result instanceof Uint8Array) {
+      resultBuffer = Buffer.from(result);
+    } else {
+      // Fallback if it returns a blob or other format
+      const arrayBuffer = await new Response(result).arrayBuffer();
+      resultBuffer = Buffer.from(arrayBuffer);
+    }
+
     const base64Result = resultBuffer.toString('base64');
-    const mimeType = resultBlob.type || "image/jpeg";
-    const outputUrl = `data:${mimeType};base64,${base64Result}`;
+    const outputUrl = `data:image/jpeg;base64,${base64Result}`;
 
     return res.status(200).json({ output: outputUrl });
 
