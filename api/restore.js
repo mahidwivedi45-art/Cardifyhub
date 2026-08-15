@@ -11,15 +11,14 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Image data is required.' });
     }
 
-    // Base64 string ko buffer mein convert karein
     const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
     const buffer = Buffer.from(base64Data, 'base64');
 
-    // Hugging Face ka official InferenceClient
     const client = new InferenceClient(process.env.HF_TOKEN);
 
+    // Provider ko 'hf-inference' kar diya hai
     const resultBlob = await client.imageToImage({
-      provider: "wavespeed",
+      provider: "hf-inference",
       model: "dx8152/Qwen-Image-Edit-2509-Light_restoration",
       inputs: buffer,
       parameters: { 
@@ -27,7 +26,6 @@ export default async function handler(req, res) {
       }
     });
 
-    // Blob ko Base64 mein convert karke frontend par bhejna
     const arrayBuffer = await resultBlob.arrayBuffer();
     const resultBuffer = Buffer.from(arrayBuffer);
     const base64Result = resultBuffer.toString('base64');
