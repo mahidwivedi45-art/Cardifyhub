@@ -1,4 +1,4 @@
-import { HfInference } from "@huggingface/inference";
+import { InferenceClient } from "@huggingface/inference";
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -15,20 +15,24 @@ export default async function handler(req, res) {
     const base64Data = image.replace(/^data:image\/\w+;base64,/, "");
     const buffer = Buffer.from(base64Data, 'base64');
 
-    const hf = new HfInference(process.env.HF_TOKEN);
+    // Hugging Face ka official InferenceClient
+    const client = new InferenceClient(process.env.HF_TOKEN);
 
-    // Official SDK ka use karke image-to-image call karein
-    const response = await hf.imageToImage({
+    const resultBlob = await client.imageToImage({
+      provider: "wavespeed",
       model: "dx8152/Qwen-Image-Edit-2509-Light_restoration",
       inputs: buffer,
-      parameters: { prompt: "restore this old damaged photo, high quality, clear details" }
+      parameters: { 
+        prompt: "restore this old damaged photo, high quality, clear details" 
+      }
     });
 
-    // Response ko base64 data URL mein badlein
-    const arrayBuffer = await response.arrayBuffer();
+    // Blob ko Base64 mein convert karke frontend par bhejna
+    const arrayBuffer = await resultBlob.arrayBuffer();
     const resultBuffer = Buffer.from(arrayBuffer);
     const base64Result = resultBuffer.toString('base64');
-    const outputUrl = `data:image/jpeg;base64,${base64Result}`;
+    const mimeType = resultBlob.type || "image/jpeg";
+    const outputUrl = `data:${mimeType};base64,${base64Result}`;
 
     return res.status(200).json({ output: outputUrl });
 
