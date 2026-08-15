@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "@huggingface/inference": "^2.8.0"
+    "@huggingface/inference": "^3.0.0"
   }
 }
