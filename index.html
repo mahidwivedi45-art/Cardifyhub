@@ -500,8 +500,8 @@ function render(v){
    ${appCard("04","Family Space","Create a private shareable family space.","space")}
   </div>
  </section>`;
- else if(v=="restore"){r.innerHTML=`
-<section class="dash"><div class="dashHead"><div><span class="eyebrow">01 / AI restoration</span><h1>Restore Photos</h1></div>
+else if(v=="restore"){r.innerHTML=`
+<section class="dash"><div class="dashHead"><div><span class="eyebrow">01 / AI restoration</span><h1>Restore Photos</h1></div></div>
 <div class="card" style="text-align: center;">
 <h2>Upload a family photo</h2><p class="muted">JPG, JPEG, PNG or WebP. Your original file remains available for download.</p>
 <div style="width: 100%; margin-top: 15px;">
@@ -513,6 +513,7 @@ function render(v){
         style="border-radius: 8px;"
     ></iframe>
 </div>
+<div class="notice" style="margin-top: 15px;">Security note: Your Hugging Face secret token must remain server-side.</div></div></section>`;}
 <div class="notice" style="margin-top: 15px;">Security note: Your Hugging Face secret token must remain server-side.</div></div></section>`;
  else if(v==="stories")r.innerHTML=`
  <section class="dash"><div class="dashHead"><div><span class="eyebrow">02 / Memory writing</span><h1>AI Stories</h1><p class="muted">Turn a memory into a formal, meaningful family story.</p></div><button class="btn dark" onclick="view('overview')">← Back to Overview</button></div>
