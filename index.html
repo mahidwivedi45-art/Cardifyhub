@@ -511,7 +511,7 @@ function render(v){
           allow="camera; microphone; encrypted-media">
         </iframe>
       </div>
-      </section>`
+      </section>`;}
  else if(v==="stories")r.innerHTML=`
  <section class="dash"><div class="dashHead"><div><span class="eyebrow">02 / Memory writing</span><h1>AI Stories</h1><p class="muted">Turn a memory into a formal, meaningful family story.</p></div><button class="btn dark" onclick="view('overview')">← Back to Overview</button></div>
  <div class="form"><div class="field"><label>Memory title</label><input id="stitle" placeholder="Grandparents' wedding"></div><div class="field"><label>Memory notes</label><textarea id="snotes" placeholder="Add names, dates, places and details you want to remember."></textarea></div><button class="btn primary" onclick="story()">Generate story preview</button><div id="sresult" class="notice hide"></div></div></section>`;
