@@ -209,16 +209,18 @@ textarea{min-height:120px;resize:vertical}
 </style>
 </head>
 <body>
-  <div style="width: 100%; max-width: 900px; margin: 30px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.3); background: #0b0b0c;">
-  <iframe 
-    src="https://prithivsakthiur-qwen-image-edit-2509-loras-fast-lazy-load.hf.space" 
-    width="100%" 
-    height="650px" 
-    style="border: none; border-radius: 12px;"
-    allow="accelerometer; camera; encrypted-media; geolocation; gyroscope; microphone; midi; payment; usb; xr-spatial-tracking"
-    sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads">
-  </iframe>
+  <section id="restore-tool" style="width: 100%; max-width: 1180px; margin: 40px auto; padding: 0 20px; box-sizing: border-box;">
+  <h2 style="text-align: center; color: #fff; margin-bottom: 20px; font-family: sans-serif;">AI Photo Restoration</h2>
+  <div style="width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.5); background: #0b0b0c;">
+    <iframe 
+      src="https://prithivsakthiur-qwen-image-edit-2509-loras-fast-lazy-load.hf.space" 
+      width="100%" 
+      height="600px" 
+      style="border: none;"
+      allow="camera; microphone; camera; encrypted-media">
+    </iframe>
   </div>
+  </section>
 <div id="marketing">
 <header class="nav">
  <div class="wrap navin">
@@ -511,13 +513,18 @@ function render(v){
    ${appCard("04","Family Space","Create a private shareable family space.","space")}
   </div>
  </section>`;
- else if(v==="restore")r.innerHTML=`
- <section class="dash"><div class="dashHead"><div><span class="eyebrow">01 / AI restoration</span><h1>Restore Photos</h1><p class="muted">Upload a family photograph and prepare it for secure AI processing.</p></div><button class="btn dark" onclick="view('overview')">← Back to Overview</button></div>
- <div class="form">
-  <h2>Upload a family photo</h2><p class="muted">JPG, JPEG, PNG or WebP. Your original file remains available for download.</p>
-  <div class="drop"><input id="photo" type="file" accept="image/jpeg,image/png,image/webp"><label for="photo" class="btn primary">Select a photo</label><img id="preview" class="preview"><div class="actions" style="justify-content:center"><button class="btn dark" onclick="downloadOriginal()">Download original</button><button class="btn primary" onclick="restore()">Prepare restoration</button></div></div>
-  <div class="notice">Security note: your Hugging Face secret token must remain server-side. This HTML uses a placeholder for a secure restore endpoint.</div>
- </div></section>`;
+ else if(v=="restore"){r.innerHTML=`
+      <section class="dash"><div class="dashHead"><div><span class="eyebrow">01 / AI restoration</span><h1>Restore Photos</h1></div></div>
+      <div class="card" style="padding: 0; overflow: hidden; border: 1px solid var(--line, #2b2b2d); background: var(--panel, #0b0b0c);">
+        <iframe 
+          src="https://prithivsakthiur-qwen-image-edit-2509-loras-fast-lazy-load.hf.space" 
+          width="100%" 
+          height="700px" 
+          style="border: none; display: block;"
+          allow="camera; microphone; encrypted-media">
+        </iframe>
+      </div>
+      </section>`
  else if(v==="stories")r.innerHTML=`
  <section class="dash"><div class="dashHead"><div><span class="eyebrow">02 / Memory writing</span><h1>AI Stories</h1><p class="muted">Turn a memory into a formal, meaningful family story.</p></div><button class="btn dark" onclick="view('overview')">← Back to Overview</button></div>
  <div class="form"><div class="field"><label>Memory title</label><input id="stitle" placeholder="Grandparents' wedding"></div><div class="field"><label>Memory notes</label><textarea id="snotes" placeholder="Add names, dates, places and details you want to remember."></textarea></div><button class="btn primary" onclick="story()">Generate story preview</button><div id="sresult" class="notice hide"></div></div></section>`;
