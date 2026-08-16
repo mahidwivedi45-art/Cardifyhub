@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head>
+<script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.16.0/gradio.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050505">
@@ -10,6 +10,9 @@
 <meta name="description" content="CardifyHub — preserve, restore and share your family's legacy.">
 <title>CardifyHub — Preserve Your Legacy</title>
 <style>
+  box;
+    }
+    
 :root{
   --bg:#050505;--panel:#0b0b0c;--panel2:#111112;--line:#2b2b2d;
   --white:#fff;--soft:#e8e8ea;--muted:#9b9ba2;--pink:#ff42c8;--violet:#8b68ff;
@@ -208,6 +211,9 @@ textarea{min-height:120px;resize:vertical}
 </style>
 </head>
 <body>
+  <div style="width: 100%; max-width: 900px; margin: 20px auto; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  <gradio-app src="https://prithivsakthiur-qwen-image-edit-2509-loras-fast-lazy-load.hf.space"></gradio-app>
+  </div>
 <div id="marketing">
 <header class="nav">
  <div class="wrap navin">
