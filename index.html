@@ -501,18 +501,11 @@ function render(v){
   </div>
  </section>`;
 else if(v=="restore"){r.innerHTML=`
-<section class="dash"><div class="dashHead"><div><span class="eyebrow">01 / AI restoration</span><h1>Restore Photos</h1></div></div>
-<div class="card" style="text-align: center;">
+<section class="dash"><div class="dashHead"><div><span class="eyebrow">01 / AI restoration</span><h1>Restore Photos</h1></div>
+<div class="card">
 <h2>Upload a family photo</h2><p class="muted">JPG, JPEG, PNG or WebP. Your original file remains available for download.</p>
-<div style="width: 100%; margin-top: 15px;">
-    <iframe
-        src="https://productowner-qwen-image-edit-2509-loras-fast-large.hf.space"
-        frameborder="0"
-        width="100%"
-        height="450"
-        style="border-radius: 8px;"
-    ></iframe>
-</div>
+<div class="drop"><input id="photo" type="file" accept="image/jpeg,png,webp"><label for="photo">Choose photo or drag and drop</label></div>
+<div class="notice">Security note: Your Hugging Face secret token must remain server-side. This HTML uses a placeholder for a secure restore endpoint.</div></div></section>`;
 <div class="notice" style="margin-top: 15px;">Security note: Your Hugging Face secret token must remain server-side. This HTML uses a placeholder for a secure restore endpoint.</div></div></section>`;
 <div class="notice" style="margin-top: 15px;">Security note: Your Hugging Face secret token must remain server-side.</div></div></section>`;
 <div class="notice" style="margin-top: 15px;">Security note: Your Hugging Face secret token must remain server-side.</div></div></section>`;}
