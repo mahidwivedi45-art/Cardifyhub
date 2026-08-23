@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>House of Sherwanis | Bespoke Sherwani Atelier — Lajpat Nagar, Delhi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Marcellus&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon:#7A1E2B;
+    --maroon-deep:#4E0F1A;
+    --gold:#B8863E;
+    --gold-light:#D8AC63;
+    --cream:#FBF7EF;
+    --ivory:#F3EBDD;
+    --ink:#2A211B;
+    --stone:#8C7F6E;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Jost',Arial,sans-serif;
+    font-weight:300;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{ font-family:'Cormorant Garamond',serif; font-weight:600; }
+  .logotype{ font-family:'Marcellus',serif; letter-spacing:1.5px; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family:inherit; cursor:pointer; }
+  :focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+  /* MARQUEE */
+  .marquee-wrap{
+    background:var(--maroon-deep); color:var(--gold-light);
+    overflow:hidden; white-space:nowrap; padding:9px 0;
+    position:fixed; top:0; left:0; right:0; z-index:200;
+  }
+  .marquee-track{
+    display:inline-block; animation:scroll-left 26s linear infinite;
+    font-family:'Marcellus',serif; font-size:.7rem; letter-spacing:3px; text-transform:uppercase;
+  }
+  .marquee-track span{ margin:0 1.6rem; }
+  @keyframes scroll-left{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+  /* NAV */
+  .nav{
+    position:fixed; top:34px; left:0; right:0; z-index:190;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 6vw;
+    background:rgba(251,247,239,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(184,134,62,0.25);
+  }
+  .nav-logo{ color:var(--maroon-deep); font-size:1.2rem; }
+  .nav-logo em{ color:var(--gold); font-style:normal; }
+  .nav-links{ display:flex; gap:2.4rem; align-items:center; list-style:none; }
+  .nav-links a{ font-size:.72rem; letter-spacing:2px; text-transform:uppercase; color:#5c5045; }
+  .nav-links a:hover{ color:var(--maroon); }
+  .nav-call{
+    border:1px solid var(--maroon); color:var(--maroon);
+    padding:8px 20px; font-size:.7rem; letter-spacing:2px; text-transform:uppercase;
+    transition:background .3s ease, color .3s ease;
+  }
+  .nav-call:hover{ background:var(--maroon); color:var(--cream); }
+  .nav-toggle{ display:none; background:none; border:none; color:var(--maroon); font-size:1.5rem; }
+  @media(max-width:860px){
+    .nav-links{
+      position:fixed; top:76px; right:0; height:calc(100vh - 76px);
+      background:var(--cream); border-left:1px solid rgba(184,134,62,0.25);
+      flex-direction:column; width:72%; max-width:320px;
+      padding:2.6rem 2rem; gap:2rem; align-items:flex-start;
+      transform:translateX(100%); transition:transform .4s ease;
+    }
+    .nav-links.open{ transform:translateX(0); }
+    .nav-toggle{ display:block; }
+    .nav-call{ display:none; }
+  }
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; position:relative;
+    padding:170px 6vw 100px;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(184,134,62,0.10), transparent 55%),
+      var(--cream);
+  }
+  .hero-ring{
+    width:112px; height:112px; border:1px solid var(--gold);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:2rem;
+    font-family:'Marcellus',serif; color:var(--maroon);
+    font-size:1.2rem; letter-spacing:2px;
+    animation:spin-slow 24s linear infinite;
+  }
+  @keyframes spin-slow{ from{ transform:rotate(0); } to{ transform:rotate(360deg); } }
+
+  .hero-eyebrow{ color:var(--stone); font-size:.72rem; letter-spacing:5px; text-transform:uppercase; margin-bottom:1.4rem; }
+  .hero h1{
+    font-size:clamp(2.6rem, 8.5vw, 5.4rem);
+    line-height:1.1; color:var(--maroon-deep); max-width:14ch;
+  }
+  .hero h1 em{ font-style:italic; color:var(--gold); }
+  .hero .tagline{
+    max-width:480px; margin:1.8rem auto 0;
+    color:#6b5d50; font-size:.98rem; letter-spacing:.3px;
+  }
+  .hero-rating{ margin-top:2rem; font-size:.85rem; letter-spacing:1px; color:var(--maroon); }
+  .hero-cta{ margin-top:2.6rem; display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+  .btn{
+    padding:15px 34px; font-size:.72rem; letter-spacing:2.5px;
+    text-transform:uppercase; border:1px solid var(--maroon);
+    transition:all .35s ease;
+  }
+  .btn-solid{ background:var(--maroon); color:var(--cream); }
+  .btn-solid:hover{ background:var(--maroon-deep); transform:translateY(-3px); box-shadow:0 16px 30px rgba(122,30,43,0.2); }
+  .btn-outline{ color:var(--maroon); }
+  .btn-outline:hover{ background:rgba(122,30,43,0.06); transform:translateY(-3px); }
+
+  /* SECTIONS SHARED */
+  section{ padding:120px 6vw; }
+  .section-inner{ max-width:1180px; margin:0 auto; }
+  .eyebrow{ color:var(--stone); font-size:.7rem; letter-spacing:4px; text-transform:uppercase; margin-bottom:1rem; }
+  .section-title{ font-size:clamp(2.1rem,4.2vw,3.2rem); color:var(--maroon-deep); margin-bottom:1.2rem; max-width:16ch; }
+  .section-title em{ font-style:italic; color:var(--gold); }
+  .rule{ width:56px; height:1px; background:var(--gold); margin-bottom:2.4rem; }
+  .reveal{ opacity:0; transform:translateY(34px); transition:opacity .9s ease, transform .9s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* PHILOSOPHY */
+  .philosophy{ text-align:center; background:var(--ivory); border-top:1px solid rgba(184,134,62,0.2); border-bottom:1px solid rgba(184,134,62,0.2); }
+  .philosophy .section-inner{ max-width:820px; }
+  .philosophy .eyebrow{ text-align:center; }
+  .philosophy p.lead{
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500;
+    font-size:clamp(1.3rem,2.6vw,1.9rem); line-height:1.5; color:var(--maroon-deep);
+  }
+  .philosophy .rule{ margin:2.4rem auto; }
+  .stats-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; margin-top:3.5rem; text-align:center; }
+  .stats-row div strong{ display:block; font-family:'Cormorant Garamond',serif; font-size:2.3rem; color:var(--maroon); }
+  .stats-row div span{ font-size:.68rem; letter-spacing:2px; text-transform:uppercase; color:var(--stone); }
+  @media(max-width:700px){ .stats-row{ grid-template-columns:1fr 1fr; } }
+
+  /* COLLECTIONS */
+  .coll-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(184,134,62,0.25); border:1px solid rgba(184,134,62,0.25); }
+  .coll-card{ background:var(--cream); padding:2.8rem 1.6rem; text-align:center; transition:background .35s ease, transform .35s ease; }
+  .coll-card:hover{ background:var(--ivory); transform:translateY(-6px); }
+  .coll-mono{
+    width:52px; height:52px; margin:0 auto 1.4rem; border:1px solid var(--gold);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-family:'Marcellus',serif; color:var(--maroon); font-size:1.1rem;
+  }
+  .coll-card h3{ font-size:1.05rem; letter-spacing:1px; text-transform:uppercase; color:var(--maroon-deep); margin-bottom:.7rem; }
+  .coll-card p{ font-size:.82rem; color:var(--stone); }
+  @media(max-width:860px){ .coll-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:500px){ .coll-grid{ grid-template-columns:1fr; } }
+
+  /* ATELIER PROCESS */
+  .atelier{ background:var(--ivory); }
+  .process{ display:grid; grid-template-columns:repeat(4,1fr); gap:2.4rem; margin-top:3rem; }
+  .process-step{ position:relative; padding-top:2.4rem; }
+  .process-step::before{
+    content:attr(data-n);
+    font-family:'Cormorant Garamond',serif; font-style:italic; font-size:.85rem;
+    color:var(--gold); position:absolute; top:0; left:0;
+  }
+  .process-step h3{ font-size:1rem; letter-spacing:1px; text-transform:uppercase; color:var(--maroon-deep); margin-bottom:.6rem; }
+  .process-step p{ font-size:.85rem; color:var(--stone); }
+  @media(max-width:860px){ .process{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:500px){ .process{ grid-template-columns:1fr; } }
+
+  /* GALLERY */
+  .gallery{ background:var(--cream); }
+  .gal-grid{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:170px; gap:8px; }
+  .gal-grid figure{
+    background:linear-gradient(155deg, var(--ivory), #eaded0);
+    border:1px solid rgba(184,134,62,0.3);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.7rem;
+    color:#a08f6a; font-size:.66rem; letter-spacing:1.5px; text-transform:uppercase;
+    text-align:center; padding:1rem; margin:0;
+    transition:transform .35s ease, border-color .35s ease;
+  }
+  .gal-grid figure:hover{ transform:scale(1.03); border-color:var(--gold); }
+  .gal-art{ width:56%; max-width:90px; height:auto; }
+  .gal-art path, .gal-art rect, .gal-art circle, .gal-art ellipse{
+    fill:none; stroke:var(--maroon); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;
+  }
+  .gal-art .thin{ stroke:var(--gold); stroke-width:1.4; }
+  .gal-art circle{ fill:var(--gold); stroke:none; }
+  .gal-grid figure:nth-child(1) .gal-art{ max-width:120px; }
+  .gal-grid figure figcaption{ font-family:'Marcellus',serif; }
+  .gal-grid figure:nth-child(1){ grid-column:span 2; grid-row:span 2; }
+  .gal-grid figure:nth-child(5){ grid-row:span 2; }
+  @media(max-width:860px){
+    .gal-grid{ grid-template-columns:repeat(2,1fr); }
+    .gal-grid figure:nth-child(1){ grid-column:span 2; grid-row:span 1; }
+    .gal-grid figure:nth-child(5){ grid-row:span 1; }
+  }
+  .gallery-note{ margin-top:1.6rem; font-size:.8rem; color:var(--stone); text-align:center; }
+
+  /* TESTIMONIALS */
+  .testimonials{ background:var(--ivory); }
+  .test-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(184,134,62,0.25); border:1px solid rgba(184,134,62,0.25); }
+  .test-card{ background:var(--cream); padding:2.4rem 1.8rem; transition:background .3s ease; }
+  .test-card:hover{ background:#fff; }
+  .test-stars{ color:var(--gold); margin-bottom:1.1rem; font-size:.85rem; letter-spacing:2px; }
+  .test-card p{ font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--maroon-deep); margin-bottom:1.2rem; font-size:1.05rem; line-height:1.6; }
+  .test-name{ font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--stone); }
+  @media(max-width:860px){ .test-grid{ grid-template-columns:1fr; } }
+
+  /* CONTACT */
+  .contact{ background:var(--cream); }
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; }
+  .contact-info dl{ display:grid; grid-template-columns:auto 1fr; gap:.8rem 1.6rem; margin-bottom:2.4rem; }
+  .contact-info dt{ color:var(--maroon); font-size:.68rem; letter-spacing:2px; text-transform:uppercase; padding-top:2px; }
+  .contact-info dd{ color:#5c5045; font-size:.92rem; }
+  .contact-map{
+    aspect-ratio:4/3; border:1px solid rgba(184,134,62,0.35);
+    background:var(--ivory);
+    display:flex; align-items:center; justify-content:center;
+    color:#a08f6a; font-size:.82rem; text-align:center; padding:1rem;
+  }
+  @media(max-width:860px){ .contact-grid{ grid-template-columns:1fr; } }
+
+  /* FOOTER */
+  footer{ background:var(--maroon-deep); color:rgba(251,247,239,0.75); padding:3.6rem 6vw 2rem; }
+  .footer-grid{
+    max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:2.4rem;
+    padding-bottom:2rem; border-bottom:1px solid rgba(216,172,99,0.25);
+  }
+  .footer-grid .logotype{ color:var(--gold-light); font-size:1.3rem; display:block; margin-bottom:.7rem; }
+  .footer-grid p{ font-size:.85rem; max-width:34ch; color:rgba(251,247,239,0.55); }
+  .footer-col h4{ font-size:.72rem; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold-light); margin-bottom:1rem; }
+  .footer-col ul{ list-style:none; display:flex; flex-direction:column; gap:.6rem; }
+  .footer-col a{ font-size:.85rem; color:rgba(251,247,239,0.65); }
+  .footer-col a:hover{ color:var(--gold-light); }
+  .footer-bottom{
+    max-width:1180px; margin:0 auto; padding-top:1.6rem;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:.9rem;
+    font-size:.68rem; letter-spacing:.5px; color:rgba(251,247,239,0.4);
+  }
+  @media(max-width:700px){ .footer-grid{ grid-template-columns:1fr; } }
+
+  /* ATELIER + PHONE MOCKUP */
+  .atelier-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:3.5rem; align-items:center; }
+  @media(max-width:960px){ .atelier-grid{ grid-template-columns:1fr; } }
+
+  .reveal-side{ opacity:0; transform:translateX(60px); transition:opacity 1s ease, transform 1s ease; }
+  .reveal-side.in{ opacity:1; transform:none; }
+
+  .phone-mockup{ display:flex; justify-content:center; }
+  .phone-frame{
+    width:300px; height:640px; border-radius:38px;
+    background:var(--maroon-deep);
+    border:6px solid #1c0a0e;
+    padding:14px;
+    position:relative;
+    box-shadow:0 30px 50px rgba(78,15,26,0.28);
+    animation:phone-float 4.5s ease-in-out infinite;
+  }
+  @keyframes phone-float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+  .phone-notch{
+    position:absolute; top:14px; left:50%; transform:translateX(-50%);
+    width:90px; height:20px; background:#1c0a0e; border-radius:12px; z-index:2;
+  }
+  .phone-screen{
+    height:100%; border-radius:26px; background:var(--maroon-deep);
+    display:flex; flex-direction:column; overflow:hidden;
+    padding-top:38px;
+  }
+  .phone-video{
+    flex:1; overflow-x:auto; overflow-y:hidden;
+    display:flex; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    background:#000;
+  }
+  .phone-reel-slide{
+    flex:0 0 100%; width:100%; height:100%; scroll-snap-align:center;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem;
+    background:linear-gradient(155deg, #1c0a0e, #000);
+    position:relative;
+  }
+  .reel-play{
+    width:64px; height:64px; border-radius:50%; border:2px solid var(--gold-light);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold-light); font-size:1.4rem; padding-left:4px;
+    animation:reel-pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes reel-pulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(216,172,99,0.35); } 50%{ box-shadow:0 0 0 14px rgba(216,172,99,0); } }
+  .reel-caption{ color:rgba(251,247,239,0.7); font-size:.72rem; letter-spacing:1px; text-transform:uppercase; }
+  .phone-dots{ display:flex; justify-content:center; gap:6px; padding:.5rem 0; background:#000; }
+  .phone-dot{ width:6px; height:6px; border-radius:50%; background:rgba(216,172,99,0.35); }
+  .phone-dot.active{ background:var(--gold-light); }
+  .phone-contact-strip{
+    display:flex; align-items:center; justify-content:space-between; gap:.6rem;
+    padding:.8rem 1rem; background:var(--maroon); border-top:1px solid rgba(216,172,99,0.3);
+  }
+  .phone-call-label{ display:block; color:rgba(251,247,239,0.55); font-size:.58rem; letter-spacing:1.5px; text-transform:uppercase; }
+  .phone-number{ display:block; color:var(--cream); font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-weight:600; }
+  .phone-icon-btn{
+    width:34px; height:34px; border-radius:50%; border:1px solid var(--gold-light);
+    display:flex; align-items:center; justify-content:center; color:var(--gold-light);
+    font-size:1rem; flex-shrink:0; transition:transform .25s ease, background .25s ease;
+  }
+  .phone-icon-btn:hover{ background:var(--gold-light); color:var(--maroon-deep); transform:translateY(-2px); }
+  @media(max-width:420px){ .phone-frame{ transform:scale(0.88); } }
+
+  /* NAV PHONE ICON */
+  .nav-call{ display:inline-flex; align-items:center; gap:6px; }
+  .nav-call svg{ width:12px; height:12px; fill:currentColor; }
+
+  /* INSTAGRAM */
+  .instagram{ background:var(--ivory); text-align:center; }
+  .insta-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem;
+    max-width:900px; margin:0 auto;
+  }
+  .insta-grid iframe, .insta-grid .instagram-media{ margin:0 auto !important; }
+  .insta-follow{ margin-top:2.4rem; }
+  @media(max-width:860px){ .insta-grid{ grid-template-columns:1fr; max-width:420px; } }
+
+  /* FLOATING WHATSAPP */
+  .float-wa{
+    position:fixed; bottom:22px; right:22px; z-index:250;
+    width:54px; height:54px; border-radius:50%;
+    background:var(--maroon); color:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem; box-shadow:0 10px 26px rgba(0,0,0,0.25);
+    animation:pulse-wa 2.6s ease infinite;
+  }
+  @keyframes pulse-wa{ 0%,100%{ box-shadow:0 10px 26px rgba(0,0,0,0.2);} 50%{ box-shadow:0 10px 26px rgba(122,30,43,0.4);} }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>BESPOKE SHERWANIS</span><span>&#9670;</span><span>LAJPAT NAGAR, NEW DELHI</span><span>&#9670;</span><span>4.6 RATED &middot; 125 REVIEWS</span><span>&#9670;</span>
+    <span>BESPOKE SHERWANIS</span><span>&#9670;</span><span>LAJPAT NAGAR, NEW DELHI</span><span>&#9670;</span><span>4.6 RATED &middot; 125 REVIEWS</span><span>&#9670;</span>
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="#top" class="nav-logo logotype">House <em>of</em> Sherwanis</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#philosophy">The House</a></li>
+    <li><a href="#collections">Collections</a></li>
+    <li><a href="#atelier">Atelier</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Visit</a></li>
+    <li><a class="nav-call" href="tel:09311611681"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1L6.6 10.8z"/></svg>Call</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" type="button">&#9776;</button>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-ring">HOS</div>
+  <p class="hero-eyebrow">Bespoke Menswear &middot; Lajpat Nagar, New Delhi</p>
+  <h1>The Art of the <em>Sherwani</em></h1>
+  <p class="tagline">Hand-finished bridal couture for the modern groom — where craft meets contemporary silhouette, made to measure in the heart of Delhi NCR.</p>
+  <p class="hero-rating">&#9733;&#9733;&#9733;&#9733;&#9733; &nbsp;4.6 &middot; 125 Reviews on Google</p>
+  <div class="hero-cta">
+    <a class="btn btn-solid" href="tel:09311611681">Book an Appointment</a>
+    <a class="btn btn-outline" href="https://wa.me/919311611681" target="_blank" rel="noopener">WhatsApp Concierge</a>
+  </div>
+</header>
+
+<section class="philosophy" id="philosophy">
+  <div class="section-inner">
+    <p class="eyebrow">The House Philosophy</p>
+    <p class="lead reveal">"Every sherwani that leaves our atelier carries a story — of thread chosen by hand, of a silhouette cut for one man alone, of a wedding day remembered for a lifetime."</p>
+    <div class="rule"></div>
+    <div class="stats-row">
+      <div class="reveal"><strong>125+</strong><span>Grooms Dressed</span></div>
+      <div class="reveal"><strong>4.6</strong><span>Google Rating</span></div>
+      <div class="reveal"><strong>100%</strong><span>Made to Measure</span></div>
+      <div class="reveal"><strong>NCR</strong><span>Delhi &amp; Beyond</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="collections" id="collections">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Collections</p>
+    <h2 class="section-title reveal">Curated for the <em>Modern Groom</em></h2>
+    <div class="rule reveal"></div>
+    <div class="coll-grid">
+      <div class="coll-card reveal"><div class="coll-mono">01</div><h3>Bridal Sherwani</h3><p>Hand embroidery, zardozi &amp; velvet — the centrepiece of your wedding day.</p></div>
+      <div class="coll-card reveal"><div class="coll-mono">02</div><h3>Indo-Western</h3><p>Fusion silhouettes for the sangeet &amp; reception.</p></div>
+      <div class="coll-card reveal"><div class="coll-mono">03</div><h3>Bandhgala Suits</h3><p>Tailored formalwear for engagement &amp; ceremony.</p></div>
+      <div class="coll-card reveal"><div class="coll-mono">04</div><h3>Safa, Stole &amp; Mojari</h3><p>The finishing details — completed under one roof.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="atelier" id="atelier">
+  <div class="section-inner atelier-grid">
+    <div>
+      <p class="eyebrow reveal">The Atelier</p>
+      <h2 class="section-title reveal">From <em>Measure</em> to Masterpiece</h2>
+      <div class="rule reveal"></div>
+      <div class="process">
+        <div class="process-step reveal" data-n="01"><h3>Consultation</h3><p>A private sitting to understand your vision, occasion &amp; palette.</p></div>
+        <div class="process-step reveal" data-n="02"><h3>Fabric Selection</h3><p>Curated silks, velvets &amp; brocades from across India.</p></div>
+        <div class="process-step reveal" data-n="03"><h3>Handcraft</h3><p>Master karigars hand-embroider every panel, thread by thread.</p></div>
+        <div class="process-step reveal" data-n="04"><h3>Final Fitting</h3><p>Precision fittings until the silhouette is exactly right.</p></div>
+      </div>
+    </div>
+    <div class="phone-mockup reveal-side">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-video">
+            <a class="phone-reel-slide" href="https://www.instagram.com/reel/DcVhBF0JoNL/" target="_blank" rel="noopener">
+              <span class="reel-play">&#9654;</span>
+              <span class="reel-caption">Reel 1 &middot; Tap to Watch</span>
+            </a>
+            <a class="phone-reel-slide" href="https://www.instagram.com/reel/DcYwmD4S-ue/" target="_blank" rel="noopener">
+              <span class="reel-play">&#9654;</span>
+              <span class="reel-caption">Reel 2 &middot; Tap to Watch</span>
+            </a>
+            <a class="phone-reel-slide" href="https://www.instagram.com/reel/DVtUt9vkjPv/" target="_blank" rel="noopener">
+              <span class="reel-play">&#9654;</span>
+              <span class="reel-caption">Reel 3 &middot; Tap to Watch</span>
+            </a>
+          </div>
+          <div class="phone-dots">
+            <span class="phone-dot active"></span><span class="phone-dot"></span><span class="phone-dot"></span>
+          </div>
+          <div class="phone-contact-strip">
+            <div>
+              <span class="phone-call-label">Call / WhatsApp</span>
+              <span class="phone-number">093116 11681</span>
+            </div>
+            <a class="phone-icon-btn" href="tel:09311611681" aria-label="Call">&#9742;</a>
+            <a class="phone-icon-btn" href="https://wa.me/919311611681" target="_blank" rel="noopener" aria-label="WhatsApp">&#9743;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Gallery</p>
+    <h2 class="section-title reveal">Inside the <em>House</em></h2>
+    <div class="rule reveal"></div>
+    <div class="gal-grid">
+      <figure class="reveal">
+        <svg viewBox="0 0 200 240" class="gal-art"><path d="M100 14c-16 0-26 10-26 22 0 6 3 10 3 10l-22 14v150c0 6 5 10 10 10h70c5 0 10-4 10-10V60l-22-14s3-4 3-10c0-12-10-22-26-22z"/><path d="M100 36v190M78 60c8 6 14 6 22 0M122 60c-8 6-14 6-22 0" class="thin"/><circle cx="100" cy="90" r="2.4"/><circle cx="100" cy="112" r="2.4"/><circle cx="100" cy="134" r="2.4"/><circle cx="100" cy="156" r="2.4"/></svg>
+        <figcaption>Sherwani Silhouette</figcaption>
+      </figure>
+      <figure class="reveal">
+        <svg viewBox="0 0 200 240" class="gal-art"><path d="M40 60c40-24 80-24 120 0v20c-40-20-80-20-120 0z"/><path d="M40 100h120M40 130h120M40 160h120M40 190h120" class="thin"/><path d="M100 40c-30 40-30 140 0 180" class="thin"/></svg>
+        <figcaption>Fabric Textures</figcaption>
+      </figure>
+      <figure class="reveal">
+        <svg viewBox="0 0 200 240" class="gal-art"><rect x="60" y="30" width="80" height="180" rx="4"/><path d="M60 70h80M60 110h80M60 150h80" class="thin"/><circle cx="100" cy="20" r="8"/></svg>
+        <figcaption>Fitting Room</figcaption>
+      </figure>
+      <figure class="reveal">
+        <svg viewBox="0 0 200 240" class="gal-art"><ellipse cx="100" cy="60" rx="46" ry="30"/><path d="M54 60c0 30 20 50 46 50s46-20 46-50" class="thin"/><path d="M70 50c10-8 50-8 60 0" class="thin"/><circle cx="100" cy="60" r="6"/></svg>
+        <figcaption>Safa &amp; Turban</figcaption>
+      </figure>
+      <figure class="reveal">
+        <svg viewBox="0 0 200 240" class="gal-art"><path d="M60 200c0-70 20-120 40-160 20 40 40 90 40 160z"/><path d="M70 160c20 12 40 12 60 0M65 190c24 14 46 14 70 0" class="thin"/><circle cx="100" cy="70" r="3"/><circle cx="90" cy="100" r="3"/><circle cx="110" cy="100" r="3"/></svg>
+        <figcaption>Hand Embroidery</figcaption>
+      </figure>
+      <figure class="reveal">
+        <svg viewBox="0 0 200 240" class="gal-art"><path d="M40 190c10-30 40-40 60-40s50 10 60 40" class="thin"/><path d="M60 190c30-10 50-10 80 0" /><ellipse cx="70" cy="192" rx="14" ry="6"/><ellipse cx="130" cy="192" rx="14" ry="6"/></svg>
+        <figcaption>Mojari &amp; Footwear</figcaption>
+      </figure>
+    </div>
+    <p class="gallery-note reveal">Original line-art illustrations — asli shop photos bhejenge to inki jagah lag jayengi.</p>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Client Words</p>
+    <h2 class="section-title reveal">What Our <em>Grooms</em> Say</h2>
+    <div class="rule reveal"></div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>The finish on my sherwani was unlike anything I'd seen — truly bespoke, from fabric to fit.</p>
+        <div class="test-name">— Aryan M., Delhi</div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>They understood exactly what I wanted for my sangeet look. Impeccable craftsmanship.</p>
+        <div class="test-name">— Rohan K., Gurugram</div>
+      </div>
+      <div class="test-card reveal">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p>Worth every appointment. The embroidery detail alone made our wedding photos unforgettable.</p>
+        <div class="test-name">— Vikram S., Noida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="section-inner contact-grid">
+    <div class="contact-info reveal">
+      <p class="eyebrow">Visit the Atelier</p>
+      <h2 class="section-title">Book a <em>Private</em> Appointment</h2>
+      <div class="rule"></div>
+      <dl>
+        <dt>Address</dt>
+        <dd>J-30, Block J, Part-2, Lajpat Nagar, New Delhi, Delhi 110024</dd>
+        <dt>Hours</dt>
+        <dd>Opens 10:30 AM &middot; Closed Sundays</dd>
+        <dt>Phone</dt>
+        <dd><a href="tel:09311611681">093116 11681</a></dd>
+        <dt>WhatsApp</dt>
+        <dd><a href="https://wa.me/919311611681" target="_blank" rel="noopener">Message the Concierge</a></dd>
+      </dl>
+      <div class="hero-cta" style="justify-content:flex-start;">
+        <a class="btn btn-solid" href="tel:09311611681">Call Now</a>
+        <a class="btn btn-outline" href="#top">Directions</a>
+      </div>
+    </div>
+    <div class="contact-map reveal">Google Map embed here<br>(exact atelier location)</div>
+  </div>
+</section>
+
+<section class="instagram" id="instagram">
+  <div class="section-inner">
+    <p class="eyebrow reveal">Follow Along</p>
+    <h2 class="section-title reveal">On <em>Instagram</em></h2>
+    <div class="rule reveal"></div>
+    <div class="insta-grid">
+      <blockquote class="instagram-media reveal" data-instgrm-permalink="https://www.instagram.com/reel/DcVhBF0JoNL/" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media reveal" data-instgrm-permalink="https://www.instagram.com/reel/DcYwmD4S-ue/" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media reveal" data-instgrm-permalink="https://www.instagram.com/reel/DVtUt9vkjPv/" data-instgrm-version="14"></blockquote>
+    </div>
+    <div class="insta-follow reveal">
+      <a class="btn btn-outline" href="https://www.instagram.com/houseofsherwanis_delhi" target="_blank" rel="noopener">Follow @houseofsherwanis_delhi</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <span class="logotype">House of Sherwanis</span>
+      <p>A bespoke menswear atelier in Lajpat Nagar, New Delhi — dressing grooms across Delhi NCR since inception.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#philosophy">The House</a></li>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#atelier">Atelier</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:09311611681">093116 11681</a></li>
+        <li><a href="https://wa.me/919311611681" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="#contact">Lajpat Nagar, New Delhi</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; <span id="year"></span> House of Sherwanis. All Rights Reserved.</span>
+    <span>Opens 10:30 AM &middot; Closed Sundays</span>
+  </div>
+</footer>
+
+<a class="float-wa" href="https://wa.me/919311611681" target="_blank" rel="noopener" aria-label="WhatsApp">&#9743;</a>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function () {
+    links.classList.toggle('open');
+  });
+  var navAnchors = links.querySelectorAll('a');
+  for (var i = 0; i < navAnchors.length; i++) {
+    navAnchors[i].addEventListener('click', function () {
+      links.classList.remove('open');
+    });
+  }
+
+  var phoneVideo = document.querySelector('.phone-video');
+  var phoneDots = document.querySelectorAll('.phone-dot');
+  if (phoneVideo && phoneDots.length) {
+    phoneVideo.addEventListener('scroll', function () {
+      var idx = Math.round(phoneVideo.scrollLeft / phoneVideo.clientWidth);
+      for (var d = 0; d < phoneDots.length; d++) {
+        phoneDots[d].classList.toggle('active', d === idx);
+      }
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      for (var j = 0; j < entries.length; j++) {
+        if (entries[j].isIntersecting) {
+          entries[j].target.classList.add('in');
+          io.unobserve(entries[j].target);
+        }
+      }
+    }, { threshold: 0.15 });
+    var revealEls = document.querySelectorAll('.reveal, .reveal-side');
+    for (var k = 0; k < revealEls.length; k++) {
+      io.observe(revealEls[k]);
+    }
+  } else {
+    var revealEls2 = document.querySelectorAll('.reveal, .reveal-side');
+    for (var m = 0; m < revealEls2.length; m++) {
+      revealEls2[m].classList.add('in');
+    }
+  }
+</script>
+
+<script async src="//www.instagram.com/embed.js"></script>
+</body>
+</html>
